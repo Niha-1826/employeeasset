@@ -1,0 +1,39 @@
+package com.employee.serviceimplementation;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.employee.entity.Asset;
+import com.employee.service.AssetService;
+
+public class AssetServiceImplementation implements AssetService {
+	
+	@Autowired
+	private Asset asset;
+
+	@Override
+	public Asset addAsset(Asset asset) {
+		
+		return null;
+	}
+
+	@Override
+	public void deleteAsset(Asset asset) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Asset updateAsset(Asset asset) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Asset> viewAllAssets() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

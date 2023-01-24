@@ -1,0 +1,28 @@
+package com.employee.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table
+public class Asset {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int itemNumber;
+	
+	@Column
+	private String itemName;
+	
+	@Column
+	private Long serialNumber;
+	
+	@Column
+	private String status
+	
+	
+
+}

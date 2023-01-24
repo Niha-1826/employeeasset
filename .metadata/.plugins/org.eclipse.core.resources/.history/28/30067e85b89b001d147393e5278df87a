@@ -1,0 +1,19 @@
+package com.employee.service;
+
+import java.util.List;
+
+import com.employee.entity.Asset;
+import com.employee.entity.Employee;
+
+public interface AdminService {
+	
+           public Employee addEmployee(Employee employee);
+           public void deleteEmployee(Employee employee);
+           public Employee updateEmployee(Employee employee);
+           public Asset addAsset(Asset asset);
+           public void deleteAsset(Asset asset);
+           public Asset editAsset(Asset asset);
+           public List<Asset> viewAllAssets();
+           public List<Employee> viewAllEmployees();
+
+}

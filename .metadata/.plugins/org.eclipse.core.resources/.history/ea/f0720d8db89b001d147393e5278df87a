@@ -1,0 +1,64 @@
+package com.employee.serviceimplementation;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.employee.entity.Asset;
+import com.employee.entity.Employee;
+import com.employee.service.AdminService;
+
+@Service
+public class AdminServiceImplementation implements AdminService{
+
+	@Override
+	public Employee addEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Employee updateEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Asset addAsset(Asset asset) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteAsset(Asset asset) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Asset editAsset(Asset asset) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Asset> viewAllAssets() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Employee> viewAllEmployees() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+
+}
