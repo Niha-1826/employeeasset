@@ -1,0 +1,28 @@
+.header {
+    width: 100%;
+    height: 5rem;
+    padding:0.25rem; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color:cornflowerblue;
+  }
+  
+  .header h1 {
+    color:whitesmoke;
+  }
+  
+  .header ul {
+    list-style: none;
+    margin: 0;
+    padding: 1rem;
+    color: whitesmoke;
+  }
+
+  .header li {
+    color:whitesmoke;
+    text-decoration: underline;
+    padding: 12px;
+    display: inline-block;
+    
+  }
