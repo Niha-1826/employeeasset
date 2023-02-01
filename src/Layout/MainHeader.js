@@ -3,6 +3,11 @@ import './MainHeader.css';
 
 const MainHeader = () => {
 
+    const clickHandler = () => {
+        localStorage.removeItem('employeeId');
+        localStorage.removeItem('adminLogin')
+    }
+
     return(
         <header className='header'>
             <h1>Employee Asset Portal</h1>
@@ -11,11 +16,9 @@ const MainHeader = () => {
                     <li>
                 <Link to ='/'> <h3>Home</h3></Link>
                     </li>
+                    
                     <li>
-                <Link to ='/login'>  <h3> Login</h3></Link>
-                    </li>
-                    <li>
-                <Link to ='/login'><h3>Logout</h3></Link>
+                <Link to ='/' onClick={clickHandler}><h3>Logout</h3></Link>
                     </li>
                 </ul>
             </nav>

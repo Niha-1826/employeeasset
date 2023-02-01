@@ -5,12 +5,15 @@ import Card from '../Layout/Card';
 import MainHeader from '../Layout/MainHeader';
 import './Form.css';
 import Button from '../Layout/Button';
+import { useNavigate } from 'react-router-dom';
 
 export default function EditEmployeeForm(props){
 
     
  
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
 
     const employee = props.currentEmployee;
 
@@ -24,8 +27,15 @@ export default function EditEmployeeForm(props){
     }
 
     const nameSubmitHandler=() => {
+
+      if(employee.employeeName.trim() === '' ){
+        alert("Please enter valid details");
+        return;
+         }
+       
     
       dispatch(updateEmployeeName(employee.employeeId,employeeName)); 
+      navigate("/controller");
           
         }
 

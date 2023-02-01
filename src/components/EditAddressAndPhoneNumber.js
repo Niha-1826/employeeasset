@@ -1,27 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updatePhoneNumberAndAddress } from "../actions/EmployeeActions";
 import { useState } from "react";
 import MainHeader from "../Layout/MainHeader";
 import Card from "../Layout/Card";
 import Button from "../Layout/Button";
+import { useNavigate } from "react-router-dom";
 
 
 function EditAddressAndPhoneNumber (props) {
 
     const dispatch = useDispatch();
 
-    
-
+    const navigate = useNavigate();
+     
     const [employee , setEmployee] = useState(props.currentEmployee);
 
-    const [error,setError] = useState(false);
- 
-
     
+ 
+        
+    
+
     const handleInputChange = (event) => {
+    
         const {name,value} = event.target;
         setEmployee({...employee,[name]:value})
+    
     }
 
     const nameSubmitHandler=(event) => {
@@ -29,13 +33,15 @@ function EditAddressAndPhoneNumber (props) {
        event.preventDefault();
        
        if(employee.phoneNumber < 0 || employee.phoneNumber.toString().length !== 10){
-        setError(true);
+        alert("Please enter valid details");
         return;
        }
 
        if(employee.employeeId == localStorage.getItem('employeeId'))
       dispatch(updatePhoneNumberAndAddress(employee.employeeId,employee)); 
-          
+      alert('Updated');
+      navigate('/controller');
+        
         }
 
         
@@ -74,7 +80,7 @@ function EditAddressAndPhoneNumber (props) {
               
               value ={employee.role}/><br></br>
 
-          <Button operation = 'Update' /> 
+          <Button operation = 'Update'  /> 
         
             
              <br></br>

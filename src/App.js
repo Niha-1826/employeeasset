@@ -1,6 +1,6 @@
 
 import { useEffect ,useState} from 'react';
-import { Route,createBrowserRouter, RouterProvider,createRoutesFromElements } from 'react-router-dom';
+import { Route,createBrowserRouter, RouterProvider,createRoutesFromElements, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import AddAssetForm from './components/AddAssetForm';
 import AddEmployeeForm from './components/AddEmployeeForm';
@@ -13,7 +13,7 @@ import AssetList from './components/AssetList';
 import EditEmployeeForm from './components/EditEmployeeForm';
 import EditAssetForm from './components/EditAssetForm';
 import EditAddressAndPhoneNumber from './components/EditAddressAndPhoneNumber';
-import ViewEmployeeById from './components/ViewEmployeeById';
+import Employee from './components/Employee';
 
 function App() {
 
@@ -36,22 +36,19 @@ function App() {
 
   const [currentAsset,setCurrentAsset] = useState({});
 
-  
-   
-
   const routes = createRoutesFromElements(
     <Route>
-      <Route path = '/' element ={<HomePage/>}/>
-      <Route path = '/login'element={<LoginPage/>}/>
-      <Route path = '/login/controller' element={<Controller/>}/>
-      <Route path = "/login/controller/addEmployee"element ={<AddEmployeeForm/>}/>
-      <Route path = "/login/controller/addAsset"element = {<AddAssetForm/>}/>
-      <Route path = "/login/controller/viewAllEmployees"element={<EmployeeList employees= {employees} setCurrentEmployee={setCurrentEmployee}/>}/>
-      <Route path = '/login/controller/viewAllAssets'element={<AssetList assets = {assets} setCurrentAsset={setCurrentAsset} />}/>
-      <Route path = '/login/controller/editEmployee'element={<EditEmployeeForm currentEmployee={currentEmployee}/>}/>
-      <Route path = '/login/controller/editAsset'element = {<EditAssetForm currentAsset={currentAsset}/>}/>
-      <Route path = '/login/controller/editPhnNumberAndAddress'element = {<EditAddressAndPhoneNumber currentEmployee={currentEmployee}/>}/>
-      <Route path = '/login/controller/viewEmployeeById'element={<ViewEmployeeById employees={employees} setCurrentEmployee={setCurrentEmployee}/>}/>
+      
+      <Route path = '/'element={<LoginPage/>}/>
+      <Route path = '/controller' element={<Controller  setCurrentEmployee={setCurrentEmployee}/>}/>
+      <Route path = "/controller/addEmployee"element ={<AddEmployeeForm/>}/>
+      <Route path = "/controller/addAsset"element = {<AddAssetForm/>}/>
+      <Route path = "/controller/viewAllEmployees"element={<EmployeeList employees= {employees} setCurrentEmployee={setCurrentEmployee}/>}/>
+      <Route path = '/controller/viewAllAssets'element={<AssetList assets = {assets} setCurrentAsset={setCurrentAsset} />}/>
+      <Route path = '/controller/editEmployee'element={<EditEmployeeForm currentEmployee={currentEmployee}/>}/>
+      <Route path = '/controller/editAsset'element = {<EditAssetForm currentAsset={currentAsset}/>}/>
+      <Route path = '/controller/editPhnNumberAndAddress'element = {<EditAddressAndPhoneNumber currentEmployee={currentEmployee}/>}/>
+    
       
     </Route>
   )

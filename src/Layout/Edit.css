@@ -1,0 +1,19 @@
+.button {
+    font: inherit;
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: #061921;
+    border: 1px solid #060315;
+    border-radius: 6px;
+    background-color: transparent;
+    cursor: pointer;
+    margin-left:20rem;
+    margin-top: 1rem;
+    
+  }
+  
+  .button:hover,
+  .button:active {
+    background-color:aliceblue;
+  }
+   

@@ -5,10 +5,11 @@ import Button from '../Layout/Button';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addAsset } from '../actions/AssetActions';
+import { useNavigate } from 'react-router-dom';
 
 function AddAssetForm(){
 
-    const [error,setError] = useState(false);
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
     
@@ -25,16 +26,14 @@ function AddAssetForm(){
         event.preventDefault();
 
         if(assets.serialNumber < 0 || assets.serialNumber == 0 || assets.status.trim() === ''){
-            setError(true);
+            alert("Please fill correct details");
             return;
         }
 
-        
-        console.log(assets)
         dispatch(addAsset(assets));
 
-        setAssets({});
-        
+        alert('Asset Added Successfully');
+        navigate('/controller');   
         
     }
     return(
@@ -46,7 +45,7 @@ function AddAssetForm(){
         <h2>Asset Form</h2>
             <Card>
               <form className='form' onSubmit={submitHandler}>
-                {error && <p>Please check the entered Details </p>}
+                
                 <div className='dropdown'>
                     <label >Item Name</label>
                     

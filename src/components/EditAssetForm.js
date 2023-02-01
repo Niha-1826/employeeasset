@@ -4,10 +4,13 @@ import { updateAsset } from "../actions/AssetActions";
 import MainHeader from "../Layout/MainHeader";
 import Card from "../Layout/Card";
 import Button from "../Layout/Button";
+import { useNavigate } from "react-router-dom";
 
 function EditAssetForm(props) {
 
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
 
     const [asset,setAsset] = useState(props.currentAsset);
     
@@ -18,8 +21,15 @@ function EditAssetForm(props) {
     }
     
     const submitHandler=(event) => {
+
+        if(asset.serialNumber < 0 || asset.serialNumber == 0 || asset.status.trim() === ''){
+            alert("Please fill correct details");
+            return;
+        }
+        
           event.preventDefault();
          dispatch(updateAsset(asset.itemNumber,asset));
+         navigate("/controller");
          
     }
 

@@ -6,12 +6,20 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import apiClient from '../api/http-common';
 
+
 function LoginPage () {
+
+    function disableBack () {
+        
+        window.history.forward();
+    }
+       setTimeout(disableBack(),0);
+       
 
         const [employeeName,setEmployeeName] = useState('');
         const [employeeId,setEmployeeId]=useState('');
 
-        const [error,setError] = useState(false);
+        
     
 
         const employeeNameChangeHandler = (event) => { 
@@ -29,26 +37,25 @@ function LoginPage () {
 
     const submitHandler = async(event) => {
 
-        event.preventDefault();
+    event.preventDefault();
 
-
+    const response = await apiClient.get(`/login/${employeeId}/${employeeName}`);
         
-        if(employeeName.trim() === '' || employeeId == 0 || employeeId < 0){
-            setError(true);
+        if(employeeName.trim() === '' || employeeId == 0 || employeeId < 0 || response.data === ''){
+            alert("Invalid User")
             return;
-        }
-
-        else{ 
-
-            const response = await apiClient.get(`/login/${employeeId}/${employeeName}`);
+        }     
+            console.log(response.data);
             localStorage.setItem('adminLogin',response.data);
             localStorage.setItem('employeeId',employeeId);
-        navigate("/login/controller");
+               navigate("/controller");
         
-        }
+        
 
-        
     }
+
+   
+      
     return(
         
           <div>
@@ -58,18 +65,18 @@ function LoginPage () {
             <Card>
             
                  <form className="form" onSubmit={submitHandler}>
-                    {error && <h2>Please enter valid details</h2>}
+        
                     <div className="login">
                         <div>
                             <label>Employee Id</label>
-                            <input type='number' value = {employeeId} onChange={employeeIdChangeHandler}/> 
+                            <input type='text' value = {employeeId} onChange={employeeIdChangeHandler}/> 
                         </div>  
                         <div>
-                            <label>Employee Name</label>
-                            <input type='text' value={employeeName} onChange={employeeNameChangeHandler}/>
+                            <label>Password</label>
+                            <input type='password' value={employeeName} onChange={employeeNameChangeHandler}/>
                         </div>
                     <div>
-                        <Button operation = 'Sign In'/>
+                        <Button operation = 'Sign In'  />
                     </div>
                     </div>
                     </form>     

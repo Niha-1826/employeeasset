@@ -11,7 +11,13 @@ function EmployeeList (props) {
 
     const dispatch = useDispatch();    
 
-    
+    const  editHandler  = (employee) => { 
+
+        props.setCurrentEmployee(employee);
+
+     }  
+     
+       
 
     return(
         <div>
@@ -42,7 +48,7 @@ function EmployeeList (props) {
                          <td>{employee.phoneNumber}</td>
                          <td>{employee.role}</td>
                          
-                        <td><button onClick={()=> {editHandler(employee)}}><Link to = '/login/controller/editEmployee'>Edit Name</Link></button></td> 
+                        <td><button onClick={()=> {editHandler(employee)}}><Link to = '/controller/editEmployee'>Edit Name</Link></button></td> 
                         
                         <td><button onClick = {() => {dispatch(deleteEmployee(employee.employeeId))}}>Delete</button></td>
                  </tr>

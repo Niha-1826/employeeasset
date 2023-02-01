@@ -39,7 +39,10 @@ function EmployeeReducer (employees = initialState , action) {
     case RETRIEVE_EMPLOYEE:
         return employees.map((employee) => {
             if(employee.employeeId === payload.employeeId){
-                return employee;
+                return {
+                    ...employee,
+                    ...payload
+                }
             }
         })
            

@@ -1,5 +1,6 @@
 import { React,useState } from "react";
 import { useDispatch } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 import { addEmployee } from "../actions/EmployeeActions";
 import Button from "../Layout/Button";
 import Card from "../Layout/Card";
@@ -9,8 +10,9 @@ import './Form.css'
 
 function AddEmployeeForm () {
 
-    const [error,setError] = useState(false);
-     const [digitError,setDigitError] = useState('');
+    const navigate = useNavigate();
+
+    
 
      const dispatch = useDispatch();
 
@@ -38,24 +40,25 @@ function AddEmployeeForm () {
         event.preventDefault();
 
         if(employee.employeeName.trim() === '' ||employee.address.trim() === ''|| employee.phoneNumber<0||employee.role.trim() ===''){
-                 setError(true);
+                 alert("Please enter valid details");
                  return;
         }
 
         if(employee.phoneNumber.toString().length !== 10){
-            setDigitError(true);
+                 alert("Please enter valid Mobile number");
             return;
         }
 
     
 
-       console.log({employee}); 
+    
 
        dispatch (addEmployee(employee));
+       alert('Employee Added Successfully');
+       navigate('/controller');
        setEmployee(initialState);
-       setError(false);
-       setDigitError(false);
-       console.log({employee});
+       
+    
     }
 
     return(
@@ -65,8 +68,8 @@ function AddEmployeeForm () {
             <Card>
                 
             <form className="form" onSubmit={submitHandler}>
-            {error && <h1>Please fill correct details!!!....</h1>}
-                {digitError && <h1>Please check number of digits of phonenumber</h1>}
+            
+    
                 <div>
                    <label>Employee Name</label>
                    <input type = 'text' name='employeeName'   onChange={handleInputChange} value={employee.employeeName}  />

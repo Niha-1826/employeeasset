@@ -38,7 +38,7 @@ function AssetList (props) {
                          <td>{asset.itemName}</td>
                          <td>{asset.serialNumber}</td>
                          <td>{asset.status}</td>
-                         <td><button onClick={()=>editHandler(asset)}><Link to = '/login/controller/editAsset'>Edit</Link></button></td>
+                         <td><button onClick={()=>editHandler(asset)}><Link to = '/controller/editAsset'>Edit</Link></button></td>
                          <td><button onClick = {()=>dispatch(deleteAsset(asset.itemNumber))}>Delete</button></td>
                                              </tr>
                      

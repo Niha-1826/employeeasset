@@ -63,7 +63,8 @@ export const updatePhoneNumberAndAddress = (employeeId,data) => async(dispatch) 
 
 export const retrieveEmployee = (employeeId) => async(dispatch) => {
       try{
-        const response = await EmployeeService.retrievEmployee(employeeId);
+
+        const response = await EmployeeService.viewEmployeeById(employeeId);
         dispatch({
             type:RETRIEVE_EMPLOYEE,
             payload:response.data,
