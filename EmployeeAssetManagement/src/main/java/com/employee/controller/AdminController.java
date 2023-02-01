@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,9 @@ import com.employee.service.EmployeeService;
 import com.employee.serviceimplementation.AssetServiceImplementation;
 import com.employee.serviceimplementation.EmployeeServiceImplementation;
 
+@CrossOrigin("*")
 @RestController
+
 public class AdminController {
 
 	@Autowired
@@ -34,14 +37,14 @@ public class AdminController {
 		return assetService.addAsset(asset);
 	}
 	
-	@DeleteMapping("/deleteAsset")
-	public void deleteAsset(@RequestBody Asset asset) {
-          assetService.deleteAsset(asset);
+	@DeleteMapping("/deleteAsset/{id}")
+	public void deleteAsset(@PathVariable("id") int id) {
+          assetService.deleteAsset(id);
 	}
 	
-	@PutMapping("/updateAsset")
-	public Asset updateAsset(@RequestBody Asset asset) {
-		return assetService.updateAsset(asset);
+	@PutMapping("/updateAsset/{id}")
+	public Asset updateAsset(@PathVariable("id") int id,@RequestBody Asset asset) {
+		return assetService.updateAsset(id,asset);
 	}
 	
 	@GetMapping("/viewAllAssets")
@@ -59,16 +62,20 @@ public class AdminController {
 		employeeService.deleteEmployee(id);
 	}
 	
-	@PutMapping("/updateEmployeeName")
-	public Employee updateEmployeeName(@RequestBody Employee employee) {
-		return employeeService.updateEmployeeName(employee);
+	@PutMapping("/updateEmployeeName/{id}/{name}")
+	public Employee updateEmployeeName(@PathVariable ("id") int id,@PathVariable("name") String name) {
+		return employeeService.updateEmployeeName(id,name);
 	}
-	
+
 	@GetMapping("/viewAllEmployees")
 	public List<Employee> viewAllEmployees(){
 		return employeeService.retriveAllEmployees();
 	}
 	
+	@GetMapping("/login/{id}/{name}")
+	public String login(@PathVariable ("id") int id,@PathVariable ("name")String name) {
+		return employeeService.login(id,name);
+	}
 	
 	
 	

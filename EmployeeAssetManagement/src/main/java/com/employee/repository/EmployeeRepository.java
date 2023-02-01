@@ -6,6 +6,6 @@ import com.employee.entity.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
 	
-	
+	public Employee findByEmployeeIdAndEmployeeName(int id,String name);
 
 }

@@ -6,7 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.employee.entity.Asset;
 import com.employee.entity.Employee;
+import com.employee.exception.AssetNotFoundException;
+import com.employee.exception.EmployeeNotFoundException;
+import com.employee.repository.AssetRepository;
 import com.employee.repository.EmployeeRepository;
 import com.employee.service.EmployeeService;
 
@@ -15,52 +19,108 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	
+	@Autowired
+	private AssetRepository assetRepository;
 
 	@Override
+	
 	public Employee addEmployee(Employee employee) {
+		     
 		employeeRepository.save(employee);
+	
 		 return employee;
 		
 	}
 
 	@Override
-	public Employee updateEmployeeAddressAndPhoneNumber(Employee employee) {
+	public Employee updateEmployeeAddressAndPhoneNumber(int id,Employee employee) {
 		
-		Optional<Employee> employeeDetails = employeeRepository.findById(employee.getEmployeeId());
+		Optional<Employee> employeeDetails = employeeRepository.findById(id);
+		
+		if(employeeDetails.isEmpty()) {
+			throw new EmployeeNotFoundException();
+		}
+		else {
 		employeeDetails.get().setAddress(employee.getAddress());
 		employeeDetails.get().setPhoneNumber(employee.getPhoneNumber());
 		
 		employeeRepository.save(employeeDetails.get());
 		
+		
+		
 		return employeeDetails.get();
+		}
 	}
 
 	@Override
-	public Employee updateEmployeeName(Employee employee) {
+	public Employee updateEmployeeName(int id, String name) {
 		
-		Optional<Employee> employeeDetails = employeeRepository.findById(employee.getEmployeeId());
-		employeeDetails.get().setEmployeeName(employee.getEmployeeName());
+		Optional<Employee> employeeDetails = employeeRepository.findById(id);
+		
+		if(employeeDetails.isEmpty()) {
+			throw new EmployeeNotFoundException();
+		}
+		else {
+		
+		employeeDetails.get().setEmployeeName(name);
 		
 		 employeeRepository.save(employeeDetails.get());
 		 return employeeDetails.get();
+		}
 	}
 
 	@Override
 	public Employee retrieveEmployeeById(int id) {
 		
-		return employeeRepository.findById(id).get();
+          Optional<Employee> employee =  employeeRepository.findById(id);
+          
+          if(employee.isEmpty()) {
+  			throw new EmployeeNotFoundException();
+  		}
+          else {
+        	  return employee.get();
+          }
 	}
 
 	@Override
 	public List<Employee> retriveAllEmployees() {
-		return employeeRepository.findAll();
+		List<Employee> employeeDetails =  employeeRepository.findAll();
+		
+		if(employeeDetails.isEmpty()) {
+			throw new EmployeeNotFoundException();
+		}
+		else {
+			return employeeDetails;
+		}
 	}
 
 	@Override
 	public void deleteEmployee(int id) {
-		employeeRepository.deleteById(id);
+		Optional<Employee> employeeDetails = employeeRepository.findById(id);
+		
+		if(employeeDetails.isEmpty()) {
+			throw new EmployeeNotFoundException();
+		}
+		else {
+			employeeRepository.deleteById(id);
+		}
 		
 	}
+	
+	public String login(int id,String name) {
+		Employee employee = employeeRepository.findByEmployeeIdAndEmployeeName(id, name);
+		if(employee != null) {
+			return employee.getRole();
+		}
+		
+		else {
+			return null;
+		}
+			
+		
+	}
+
 	
 	
 
