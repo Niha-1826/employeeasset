@@ -28,26 +28,27 @@ public class Asset {
 	@Column
 	private String status;
 	
+	@ManyToOne
+	private Employee employee;
+	
 	
 	public Asset() {}
-
 	
-
-	public Asset(Integer itemNumber, String itemName, Long serialNumber, String statu) {
+	public Asset(Integer itemNumber, String itemName, Long serialNumber, String status, Employee employee) {
 		super();
 		this.itemNumber = itemNumber;
 		this.itemName = itemName;
 		this.serialNumber = serialNumber;
 		this.status = status;
-		
+		this.employee = employee;
 	}
 
 
+	
 
 	public Integer getItemNumber() {
 		return itemNumber;
 	}
-
 
 
 	public void setItemNumber(Integer itemNumber) {
@@ -55,11 +56,9 @@ public class Asset {
 	}
 
 
-
 	public String getItemName() {
 		return itemName;
 	}
-
 
 
 	public void setItemName(String itemName) {
@@ -67,11 +66,9 @@ public class Asset {
 	}
 
 
-
 	public Long getSerialNumber() {
 		return serialNumber;
 	}
-
 
 
 	public void setSerialNumber(Long serialNumber) {
@@ -79,11 +76,9 @@ public class Asset {
 	}
 
 
-
 	public String getStatus() {
 		return status;
 	}
-
 
 
 	public void setStatus(String status) {
@@ -91,11 +86,25 @@ public class Asset {
 	}
 
 
+	public Employee getEmployee() {
+		return employee;
+	}
+
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+
+	
 	@Override
 	public String toString() {
 		return "Asset [itemNumber=" + itemNumber + ", itemName=" + itemName + ", serialNumber=" + serialNumber
-				+ ", status=" + status + "]";
+				+ ", status=" + status + ", employee=" + employee + "]";
 	}
+	
+
+	
 
 	
 	

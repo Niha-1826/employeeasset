@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.employee.entity.Asset;
+import com.employee.entity.Employee;
 import com.employee.repository.AssetRepository;
 import com.employee.serviceimplementation.AssetServiceImplementation;
 
@@ -31,7 +32,7 @@ public class AssetTestCases {
 	@Test
 	void addAsset () {
 		
-		Asset asset = new Asset(1,"Laptop",765253627L,"allocated");
+		Asset asset = new Asset(1,"Laptop",765253627L,"allocated",new Employee());
 		
 		when(assetRepository.save(asset)).thenReturn(asset);
 		Asset assetDetails = assetService.addAsset(asset);
@@ -40,8 +41,8 @@ public class AssetTestCases {
 	
 	@Test
 	void deleteAsset () {
-		
-		assetService.deleteAsset(1);
+		Asset asset = new Asset(1,"Laptop",765253627L,"allocated",new Employee());
+		assetService.deleteAsset(asset.getItemNumber());
 		verify(assetRepository,times(1)).deleteById(1);
 	}
 	
@@ -50,8 +51,8 @@ public class AssetTestCases {
 		
 		List<Asset> assetList = new ArrayList();
 		
-		Asset asset = new Asset(1,"Laptop",765253627L,"allocated");
-		Asset asset1 = new Asset(1,"Laptop",765253627L,"allocated");
+		Asset asset = new Asset(1,"Laptop",765253627L,"allocated",new Employee());
+		Asset asset1 = new Asset(1,"Laptop",765253627L,"allocated",new Employee());
 		
 		assetList.add(asset1);
 		assetList.add(asset);
@@ -64,7 +65,7 @@ public class AssetTestCases {
 	@Test
 	void updateAsset () {
 		
-		Asset asset = new Asset(1,"Laptop",765253627L,"allocated");
+		Asset asset = new Asset(1,"Laptop",765253627L,"allocated",new Employee());
 		
 		when(assetRepository.findById(asset.getItemNumber())).thenReturn(Optional.of(asset));
 		

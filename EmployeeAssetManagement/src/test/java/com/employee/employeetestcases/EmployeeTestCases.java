@@ -14,7 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.employee.entity.Asset;
+
 import com.employee.entity.Employee;
 import com.employee.repository.EmployeeRepository;
 import com.employee.serviceimplementation.EmployeeServiceImplementation;
@@ -32,15 +32,9 @@ public class EmployeeTestCases {
 	@Test
 	 void addEmployee() {
 		
-        List<Asset> assetList = new ArrayList();
+        
 		
-		Asset asset = new Asset(1,"Laptop",765253627L,"allocated");
-		Asset asset1 = new Asset(1,"Laptop",765253627L,"allocated");
-		
-		assetList.add(asset1);
-		assetList.add(asset);
-		
-	 Employee employee = new Employee(1,"yogita","hyd",7780436621L ,"analyst",assetList);
+	 Employee employee = new Employee(1,"yogita","hyd",7780436621L ,"analyst");
 	 
 	 when(employeeRepository.save(employee)).thenReturn(employee);
 	 
@@ -52,18 +46,12 @@ public class EmployeeTestCases {
 	
 	@Test
 	 void retrieveAllEmployees() {
-         List<Asset> assetList = new ArrayList();
-		
-		Asset asset = new Asset(1,"Laptop",765253627L,"allocated");
-		Asset asset1 = new Asset(1,"Laptop",765253627L,"allocated");
-		
-		assetList.add(asset1);
-		assetList.add(asset);
+        
 		
         	
 	 List<Employee> employeesList = new ArrayList<>();
 	 
-	 Employee employee1 = new Employee(1,"yogita","hyd",7780436621L ,"analyst",assetList);
+	 Employee employee1 = new Employee(1,"yogita","hyd",7780436621L ,"analyst");
 	 
 	 
 	 employeesList.add(employee1);
@@ -80,15 +68,9 @@ public class EmployeeTestCases {
 	@Test
 	void updateEmployeeAddressAndPhoneNumber() {
 		
-        List<Asset> assetList = new ArrayList();
+        
 		
-		Asset asset = new Asset(1,"Laptop",765253627L,"allocated");
-		Asset asset1 = new Asset(1,"Laptop",765253627L,"allocated");
-		
-		assetList.add(asset1);
-		assetList.add(asset);
-		
-        Employee employee = new Employee(1,"yogitha","hyd",7780436621L ,"analyst",assetList);
+        Employee employee = new Employee(1,"yogitha","hyd",7780436621L ,"analyst");
         
 	 when(employeeRepository.findById(employee.getEmployeeId())).thenReturn(Optional.of(employee));
 	 

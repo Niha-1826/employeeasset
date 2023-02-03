@@ -10,6 +10,6 @@ public interface AssetService  {
 	public void deleteAsset(int id);
 	public Asset updateAsset(int id,Asset asset);
 	public List<Asset> viewAllAssets();
-	
+	public List<Asset> viewAssetsOfEmployee(int id);
 
 }

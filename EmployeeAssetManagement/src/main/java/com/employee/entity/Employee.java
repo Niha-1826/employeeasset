@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class Employee {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column
 	private int employeeId;
 	
 	@Column
@@ -32,29 +32,19 @@ public class Employee {
 	
 	@Column
 	private String role;
-	
-	@OneToMany(cascade = CascadeType.MERGE)
-	@JoinTable(
-			name = "employees_assets",
-			joinColumns = @JoinColumn(name = "employee_id"),
-			inverseJoinColumns = @JoinColumn(name="asset_id")
-			
-			)
-	private List<Asset> assets;
-	
+
 	
 	public Employee() {}
 
 
-	public Employee(int employeeId, String employeeName, String address, Long phoneNumber, String role,
-			List<Asset> assets) {
+	public Employee(int employeeId, String employeeName, String address, Long phoneNumber, String role) {
 		super();
 		this.employeeId = employeeId;
 		this.employeeName = employeeName;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.role = role;
-		this.assets = assets;
+	
 	}
 
 
@@ -108,20 +98,13 @@ public class Employee {
 	}
 
 
-	public List<Asset> getAssets() {
-		return assets;
-	}
-
-
-	public void setAssets(List<Asset> assets) {
-		this.assets = assets;
-	}
+	
 
 
 	@Override
 	public String toString() {
 		return "Employee [employeeId=" + employeeId + ", employeeName=" + employeeName + ", address=" + address
-				+ ", phoneNumber=" + phoneNumber + ", role=" + role + ", assets=" + assets + "]";
+				+ ", phoneNumber=" + phoneNumber + ", role=" + role + "]";
 	}
 
 	
