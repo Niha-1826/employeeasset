@@ -26,6 +26,11 @@ function AssetList (props) {
                             <th>Item Name</th>
                             <th>Serial Number</th>
                             <th>Status</th>
+                            <th>Employee Id</th>
+                            <th>Employee Name</th>
+                            <th>Address</th>
+                            <th>Phone Number</th>
+                            <th>Role</th>
                             
                         </tr>
                     </thead>
@@ -38,6 +43,11 @@ function AssetList (props) {
                          <td>{asset.itemName}</td>
                          <td>{asset.serialNumber}</td>
                          <td>{asset.status}</td>
+                         <td>{asset.employee.employeeId}</td>
+                         <td>{asset.employee.employeeName}</td>
+                         <td>{asset.employee.address}</td>
+                         <td>{asset.employee.phoneNumber}</td>
+                         <td>{asset.employee.role}</td>
                          <td><button onClick={()=>editHandler(asset)}><Link to = '/controller/editAsset'>Edit</Link></button></td>
                          <td><button onClick = {()=>dispatch(deleteAsset(asset.itemNumber))}>Delete</button></td>
                                              </tr>

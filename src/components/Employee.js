@@ -5,9 +5,10 @@ import '../Layout/Edit.css';
 import './Form.css';
 
 
+
 function Employee(props) {
 
-        
+        const employee = props.employee;
     
     const  editHandler  = (employee) => { 
 
@@ -15,35 +16,22 @@ function Employee(props) {
         props.setCurrentEmployee(employee);
 
      }  
-     return (
+    return(
         <div className="login">
-            
-            <table border='4cm'>
-                    <thead>
-                        <tr>
-                            <th>Employee Id</th>
-                            <th>Employee Name</th>
-                            <th>Address</th>
-                            <th>Phone Number</th>
-                            <th>Role</th>                           
-                        </tr>
-                    </thead>
-                    <tbody>                  
-                        <tr key = {employee.employeeId}>
-                         <td>{employee.employeeId}</td>
-                         <td>{employee.employeeName}</td>
-                         <td>{employee.address}</td>
-                         <td>{employee.phoneNumber}</td>
-                         <td>{employee.role}</td>
-                         
-
-<td><button onClick = {editHandler(employee)}> <Link to = '/controller/editPhnNumberAndAddress'>Edit</Link> </ button></td>
-                </tr>
-            </tbody>
-            </table>
-
-        
+        <form className="form">
+            <label>Employee Id</label>
+            <input value = {employee.employeeId}/>
+            <label>Employee Name</label>
+            <input value = {employee.employeeName}/>
+            <label>Address</label>
+            <input value = {employee.address}/>
+            <label>Phone Number</label>
+            <input value = {employee.phoneNumber}/>
+            <label>Role</label>
+            <input value = {employee.role}/> < br/><br/>
+            <button className="button" onClick={editHandler(employee)}><Link to = '/controller/editPhnNumberAndAddress'> Edit </Link></button>
+        </form>
         </div>
-     )
+    )
 }
 export default Employee;

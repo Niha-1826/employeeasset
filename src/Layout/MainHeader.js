@@ -14,7 +14,7 @@ const MainHeader = () => {
             <nav>
                 <ul>
                     <li>
-                <Link to ='/'> <h3>Home</h3></Link>
+                <Link to ='/controller'> <h3>Home</h3></Link>
                     </li>
                     
                     <li>

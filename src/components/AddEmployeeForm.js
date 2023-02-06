@@ -1,6 +1,6 @@
-import { React,useState } from "react";
+import { React,useContext,useState } from "react";
 import { useDispatch } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { addEmployee } from "../actions/EmployeeActions";
 import Button from "../Layout/Button";
 import Card from "../Layout/Card";
@@ -8,32 +8,28 @@ import MainHeader from "../Layout/MainHeader";
 import './Form.css'
 
 
-function AddEmployeeForm () {
+
+function AddEmployeeForm (props) {
 
     const navigate = useNavigate();
-
-    
 
      const dispatch = useDispatch();
 
     
-    const initialState = {
-        employeeName:'',
-        address:'',
-        phoneNumber:0,
-        role:''
-    }
-    const [employee,setEmployee] = useState(initialState);
+    
+
+      const employee = props.employee;
+      
 
     const handleInputChange = (event) => {
         const {name,value} = event.target;
-
-        setEmployee({...employee,[name]:value})
+                props.setEmployee({...employee,[name]:value})
+                
     }
 
+      
    
-    
-
+       
 
     const submitHandler =(event) =>{
        
@@ -47,16 +43,13 @@ function AddEmployeeForm () {
         if(employee.phoneNumber.toString().length !== 10){
                  alert("Please enter valid Mobile number");
             return;
-        }
-
+        }   
     
-
-    
-
        dispatch (addEmployee(employee));
+       
        alert('Employee Added Successfully');
-       navigate('/controller');
-       setEmployee(initialState);
+       navigate('/controller/viewAllEmployees');
+       
        
     
     }
@@ -69,7 +62,7 @@ function AddEmployeeForm () {
                 
             <form className="form" onSubmit={submitHandler}>
             
-    
+            
                 <div>
                    <label>Employee Name</label>
                    <input type = 'text' name='employeeName'   onChange={handleInputChange} value={employee.employeeName}  />
@@ -80,12 +73,13 @@ function AddEmployeeForm () {
                    </div>
                    <div>
                    <label>Phone Number</label>
-                   <input type='number'name='phoneNumber' onChange={handleInputChange}  value = {employee.phoneNumber} />
+                   <input type='text'name='phoneNumber' onChange={handleInputChange}  value = {employee.phoneNumber} />
                    </div>
                    <div>
                    <label>Role</label>
-                   <input type ='text' name = 'role'   onChange={handleInputChange} value = {employee.role}></input>
-                   </div>
+                   <input type ='text' name = 'role'   onChange={handleInputChange} value = {employee.role}/>
+                   </div>      
+                   
                    <Button operation = 'Add Employee' />
                 </form>  
                 </Card>   

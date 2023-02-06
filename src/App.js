@@ -6,14 +6,13 @@ import AddAssetForm from './components/AddAssetForm';
 import AddEmployeeForm from './components/AddEmployeeForm';
 import Controller from './components/Controller';
 import EmployeeList from './components/EmployeesList';
-import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import apiClient from './api/http-common';
 import AssetList from './components/AssetList';
 import EditEmployeeForm from './components/EditEmployeeForm';
 import EditAssetForm from './components/EditAssetForm';
 import EditAddressAndPhoneNumber from './components/EditAddressAndPhoneNumber';
-import Employee from './components/Employee';
+
 
 function App() {
 
@@ -21,7 +20,7 @@ function App() {
 
   useEffect(()=>{apiClient.get('/viewAllEmployees').then((response)=>{
     setEmployees(response.data);
-  })},[]);
+  })},[employees]);
 
 
   const [assets,setAssets] = useState([]);
@@ -30,19 +29,23 @@ function App() {
     setAssets(response.data);
   })
 
-  },[]);
+  },[assets]);
 
   const [currentEmployee,setCurrentEmployee] = useState({});
 
   const [currentAsset,setCurrentAsset] = useState({});
+
+  const [employee,setEmployee] = useState('');
+
+  
 
   const routes = createRoutesFromElements(
     <Route>
       
       <Route path = '/'element={<LoginPage/>}/>
       <Route path = '/controller' element={<Controller  setCurrentEmployee={setCurrentEmployee}/>}/>
-      <Route path = "/controller/addEmployee"element ={<AddEmployeeForm/>}/>
-      <Route path = "/controller/addAsset"element = {<AddAssetForm/>}/>
+      <Route path = "/controller/addEmployee"element ={<AddEmployeeForm setEmployee={setEmployee} employee = {employee}/>}/>
+      <Route path = "/controller/addAsset"element = {<AddAssetForm currentEmployee = {currentEmployee} />}/>
       <Route path = "/controller/viewAllEmployees"element={<EmployeeList employees= {employees} setCurrentEmployee={setCurrentEmployee}/>}/>
       <Route path = '/controller/viewAllAssets'element={<AssetList assets = {assets} setCurrentAsset={setCurrentAsset} />}/>
       <Route path = '/controller/editEmployee'element={<EditEmployeeForm currentEmployee={currentEmployee}/>}/>

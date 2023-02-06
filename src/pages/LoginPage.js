@@ -9,18 +9,12 @@ import apiClient from '../api/http-common';
 
 function LoginPage () {
 
-    function disableBack () {
-        
-        window.history.forward();
-    }
-       setTimeout(disableBack(),0);
+   
        
 
         const [employeeName,setEmployeeName] = useState('');
         const [employeeId,setEmployeeId]=useState('');
 
-        
-    
 
         const employeeNameChangeHandler = (event) => { 
               setEmployeeName(event.target.value);
@@ -50,11 +44,7 @@ function LoginPage () {
             localStorage.setItem('employeeId',employeeId);
                navigate("/controller");
         
-        
-
     }
-
-   
       
     return(
         
@@ -69,11 +59,11 @@ function LoginPage () {
                     <div className="login">
                         <div>
                             <label>Employee Id</label>
-                            <input type='text' value = {employeeId} onChange={employeeIdChangeHandler}/> 
+                            <input type='text' value = {employeeId} onChange={employeeIdChangeHandler} placeholder='Id'/> 
                         </div>  
                         <div>
                             <label>Password</label>
-                            <input type='password' value={employeeName} onChange={employeeNameChangeHandler}/>
+                            <input type='password' value={employeeName} onChange={employeeNameChangeHandler} placeholder='User Name'/>
                         </div>
                     <div>
                         <Button operation = 'Sign In'  />

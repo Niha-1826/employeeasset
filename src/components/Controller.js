@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import Employee from "./Employee";
 import apiClient from '../api/http-common';
 import '../Layout/EmployeeForm.css';
-import { useDispatch } from "react-redux";
-import { retrieveEmployee } from "../actions/EmployeeActions";
+import EmployeeAssetList from "./EmployeeAssetList";
+
 
 
 
@@ -16,11 +16,16 @@ function Controller(props) {
     
 
      const employeeId = localStorage.getItem('employeeId');
+
+    // console.log(employeeId);
      
      const [employee,setEmployee] = useState(''); 
     
     const adminLogin = localStorage.getItem('adminLogin');
     const [admin,setAdmin] = useState(false);
+
+    const [assets,setAssets] = useState([]);
+
           
     
 
@@ -28,7 +33,16 @@ function Controller(props) {
         setEmployee(response.data);
       })},[]);
 
-   
+     
+
+      useEffect(()=>{apiClient.get(`/viewAssetsOfEmployee/${employeeId}`).then((response)=>{
+        setAssets(response.data);
+    
+      })},[assets]);
+  
+  
+    
+
 
     useEffect(()=> {
         if(adminLogin === 'admin'){
@@ -36,10 +50,8 @@ function Controller(props) {
         }
     },[]);
 
-      history.pushState({
-        state : employee
-      })
-     
+    
+      
     return(
 
         <div>
@@ -48,13 +60,16 @@ function Controller(props) {
    
             <div className="employee">
         <Employee employee = {employee} setCurrentEmployee = {props.setCurrentEmployee} />
+        
         </div>
          
+         <div>
+          <EmployeeAssetList assets = {assets} />
+         </div>
     
        {admin &&  
          <div>
        <Link to ="/controller/addEmployee"><h2>Add Employee</h2></Link> 
-          <Link to = "/controller/addAsset"><h2>Add Asset</h2></Link> 
         <Link to ="/controller/viewAllEmployees"><h2>View All Employees</h2></Link> 
          <Link to = '/controller/viewAllAssets'><h2>View All Assets</h2></Link>  
 

@@ -2,10 +2,10 @@ import { ADD_ASSET, DELETE_ASSET, UPDATE_ASSET, VIEW_ALL_ASSETS } from "./types"
 
 import AssetService from "../services/AssetService";
 
- export const addAsset = ({itemNumber,itemName,serialNumber,status}) => async (dispatch) => {
+ export const addAsset = ({itemNumber,itemName,serialNumber,status,employee}) => async (dispatch) => {
       
     try {
-        const response = await AssetService.addAsset({itemNumber,itemName,serialNumber,status})
+        const response = await AssetService.addAsset({itemNumber,itemName,serialNumber,status,employee})
 
         dispatch({
             type : ADD_ASSET,

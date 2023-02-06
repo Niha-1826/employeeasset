@@ -2,24 +2,37 @@ import './Form.css';
 import Card from '../Layout/Card';
 import MainHeader from '../Layout/MainHeader';
 import Button from '../Layout/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addAsset } from '../actions/AssetActions';
 import { useNavigate } from 'react-router-dom';
 
-function AddAssetForm(){
+function AddAssetForm(props){
 
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
+
     
-     const [assets,setAssets] = useState([{}]);
+
+    const initialAsset = {
+        itemName : '',
+        serialNumber : '',
+        status : '',
+        employee : {
+            employeeId:props.currentEmployee.employeeId
+        }
+    }
+    
+     const [assets,setAssets] = useState(initialAsset); 
 
      const handleInputChange = (event) => {
         const {name,value} = event.target;
 
         setAssets({...assets,[name]:value})
     }
+
+   
 
     const submitHandler = (event) => {
 
@@ -33,18 +46,28 @@ function AddAssetForm(){
         dispatch(addAsset(assets));
 
         alert('Asset Added Successfully');
-        navigate('/controller');   
+        navigate('/controller');  
+         
         
     }
+
+   
+
     return(
         
         
         <div className='login'>
         
         <MainHeader/>
+        
         <h2>Asset Form</h2>
             <Card>
               <form className='form' onSubmit={submitHandler}>
+
+              <div>
+                    <label>Employee Id</label>
+                    <input type = 'text' name ='employeeId'  value = {assets.employee.employeeId}/>
+                </div>
                 
                 <div className='dropdown'>
                     <label >Item Name</label>
@@ -66,11 +89,16 @@ function AddAssetForm(){
                     <label>Status</label>
                     <input type='text' name='status' onChange={handleInputChange} value = {assets.status}/>
                 </div>
+
                 <div>
                     <Button operation = 'Add Asset'/>
                 </div>
+                
               </form>
+              
               </Card>
+
+              
         </div>
 
     )
